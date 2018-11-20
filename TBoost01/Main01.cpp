@@ -4,7 +4,8 @@
 #define _DF_3 0
 #define _DF_4 0
 #define _DF_5 0
-#define _DF_6 1
+#define _DF_6 0
+#define _DF_7 1
 
 
 #if _DF_0
@@ -154,7 +155,6 @@ int main(int argc, char* argv[]) {
 	return EXIT_SUCCESS;
 }
 #endif
-
 
 #if _DF_3
 
@@ -559,3 +559,29 @@ int main(int argc, char *argv[])
 
 #endif
 
+#if _DF_7
+
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int operate(int a, int b) {
+	return (a*b);
+}
+
+double operate(double a, double b) {
+	return (a / b);
+}
+
+int main(int argc, char* argv[]) {
+
+	int x = 5, y = 2;
+	double n = 5.0, m = 2.0;
+	cout << operate(x, y) << endl;
+	cout << operate(n, m) << endl;
+
+	return EXIT_SUCCESS;
+}
+
+#endif // _df

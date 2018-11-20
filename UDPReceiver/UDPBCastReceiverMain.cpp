@@ -52,13 +52,22 @@ private:
 			boost::asio::buffer(data_), sender_endpoint_,
 			[this](boost::system::error_code ec, std::size_t length)
 		{
-			if (!ec)
+			if (!ec && length > 0)
 			{
+				socket_.async_send_to(boost::asio::buffer(data_, length), sender_endpoint_, 
+					[this](boost::system::error_code /*ec*/, std::size_t /*bytes_sent*/)
+				{
+					do_receive();
+				});
+			}
+			else {
+				do_receive();
+			}
+
+			if (length > 0) {
 				std::cout << "RCV : " << std::this_thread::get_id() << " ,";
 				std::cout.write(data_.data(), length);
 				std::cout << std::endl;
-
-				do_receive();
 			}
 		});
 	}

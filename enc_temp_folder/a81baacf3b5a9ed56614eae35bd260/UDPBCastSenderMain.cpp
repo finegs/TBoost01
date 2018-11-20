@@ -251,11 +251,7 @@ int main(int argc, char* argv[])
 
 	multicast_sender sender(argv[1], argv[2], multicast_port);
 	char* data = (char*)malloc(SND_BUF_SIZE);
-	if (!data) {
-		std::cerr << "malloc failed : SendBuffer, " << SND_BUF_SIZE << std::endl;
-		return EXIT_FAILURE;
-	}
-	std::memset(data, '\0', SND_BUF_SIZE);
+	std::memset(data, 0, SND_BUF_SIZE);
 	//sender.send(data, SIZE);
 
 	// Give some time to allow for the async operation to complete 
